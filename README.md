@@ -1,1 +1,2 @@
-# PnP
+# Plug and play project
+
