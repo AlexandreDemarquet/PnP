@@ -43,20 +43,20 @@ L'algorithme ADMM (Alternating Direction Method of Multipliers) est souvent util
 
 1. **Formulation du problème avec une variable auxiliaire** :
    On reformule le problème d'optimisation en introduisant une variable auxiliaire $\mathbf{z}$ :
-   $$\min_{\mathbf{x}, \mathbf{z}} \frac{1}{2} \|\mathbf{y} - \mathbf{A} \mathbf{x}\|^2_2 + \lambda R(\mathbf{z}) \quad \text{sous les contraintes} \quad \mathbf{x} = \mathbf{z}.$$
+   $\min_{\mathbf{x}, \mathbf{z}} \frac{1}{2} \|\mathbf{y} - \mathbf{A} \mathbf{x}\|^2_2 + \lambda R(\mathbf{z}) \quad \text{sous les contraintes} \quad \mathbf{x} = \mathbf{z}.$
 
 2. **Mise à jour de $\mathbf{x}$** :
    La mise à jour de $\mathbf{x}$ se fait en minimisant un terme qui combine la fidélité aux données et la proximité de $\mathbf{x}$ à $\mathbf{z}$ de l'itération précédente :
-   $$\mathbf{x}_{k+1} = \arg \min_{\mathbf{x}} \left( \frac{1}{2} \|\mathbf{y} - \mathbf{A} \mathbf{x}\|^2_2 + \frac{\rho}{2} \|\mathbf{x} - \mathbf{z}_k + \frac{1}{\rho} \mathbf{u}_k \|^2_2 \right),$$
+   $\mathbf{x}_{k+1} = \arg \min_{\mathbf{x}} \left( \frac{1}{2} \|\mathbf{y} - \mathbf{A} \mathbf{x}\|^2_2 + \frac{\rho}{2} \|\mathbf{x} - \mathbf{z}_k + \frac{1}{\rho} \mathbf{u}_k \|^2_2 \right),$
    où $\mathbf{u}_k$ est une variable duale mise à jour à chaque itération.
 
 3. **Mise à jour de $\mathbf{z}$** :
    La mise à jour de $\mathbf{z}$ utilise le débruiteur Plug-and-Play pour imposer la régularisation :
-   $$\mathbf{z}_{k+1} = \arg \min_{\mathbf{z}} \left( \lambda R(\mathbf{z}) + \frac{\rho}{2} \|\mathbf{x}_{k+1} - \mathbf{z} + \frac{1}{\rho} \mathbf{u}_k \|^2_2 \right).$$
+   $\mathbf{z}_{k+1} = \arg \min_{\mathbf{z}} \left( \lambda R(\mathbf{z}) + \frac{\rho}{2} \|\mathbf{x}_{k+1} - \mathbf{z} + \frac{1}{\rho} \mathbf{u}_k \|^2_2 \right).$
 
 4. **Mise à jour de la variable duale $\mathbf{u}$** :
    Enfin, la variable duale est mise à jour pour ajuster la contrainte $\mathbf{x} = \mathbf{z}$ :
-   $$\mathbf{u}_{k+1} = \mathbf{u}_k + \rho (\mathbf{x}_{k+1} - \mathbf{z}_{k+1}).$$
+   $\mathbf{u}_{k+1} = \mathbf{u}_k + \rho (\mathbf{x}_{k+1} - \mathbf{z}_{k+1}).$
 
 #### Utilisation de la Descente de Gradient
 
@@ -69,11 +69,11 @@ En plus de l'algorithme ADMM, la descente de gradient est une autre méthode pop
    L'algorithme de descente de gradient est modifié pour intégrer un débruiteur dans chaque itération. La mise à jour de l'estimation $\mathbf{x}$ se fait en deux étapes :
 
    - **Mise à jour par descente de gradient** :
-     $$\mathbf{x}_{k+1/2} = \mathbf{x}_k - \alpha \nabla_{\mathbf{x}} \left( \frac{1}{2} \|\mathbf{y} - \mathbf{A} \mathbf{x}_k\|^2_2 \right),$$
+     $\mathbf{x}_{k+1/2} = \mathbf{x}_k - \alpha \nabla_{\mathbf{x}} \left( \frac{1}{2} \|\mathbf{y} - \mathbf{A} \mathbf{x}_k\|^2_2 \right),$
      où $\alpha$ est le pas de la descente de gradient et $\nabla_{\mathbf{x}}$ est le gradient de la fonction de coût par rapport à $\mathbf{x}$.
 
    - **Débruitage Plug-and-Play** :
-     $$\mathbf{x}_{k+1} = D_{\sigma}(\mathbf{x}_{k+1/2}),$$
+     $\mathbf{x}_{k+1} = D_{\sigma}(\mathbf{x}_{k+1/2}),$
      où $D_{\sigma}$ est le débruiteur utilisé comme modèle de régularisation implicite.
 
 3. **Itération** :
@@ -88,3 +88,53 @@ Les méthodes Plug-and-Play offrent plusieurs avantages importants pour la réso
 3. **Modularité** : Elles séparent la régularisation de l'optimisation, ce qui permet de modifier ou de remplacer les débruiteurs sans changer l'algorithme d'optimisation sous-jacent.
 
 En résumé, les méthodes Plug-and-Play représentent une approche puissante et flexible pour traiter les problèmes inverses en intégrant des modèles de priors sophistiqués dans le processus d'optimisation, ce qui améliore considérablement la qualité de la reconstruction d'images. Que ce soit par l'algorithme ADMM ou la descente de gradient, ces méthodes permettent d'utiliser des débruiteurs avancés pour obtenir des résultats optimaux.
+
+
+
+
+
+## Implémentation des Méthodes Plug-and-Play dans Notre Projet
+
+Dans notre projet, nous avons exploré et implémenté les méthodes Plug-and-Play pour améliorer la qualité des images en utilisant différents types de débruiteurs et divers algorithmes d'optimisation. Notre approche vise à résoudre plusieurs problèmes inverses, tels que le défloutage, l'inpainting (restauration des parties manquantes d'une image), et l'hyperrésolution (augmentation de la résolution des images).
+
+### Débruiteurs Utilisés
+
+Pour nos expériences, nous avons intégré plusieurs types de débruiteurs :
+
+1. **U-Net préentraîné** :
+   - **Description** : Le U-Net est un réseau de neurones convolutifs populaire pour les tâches de segmentation et de débruitage. Il est conçu pour capturer les caractéristiques spatiales des images à différentes échelles grâce à une architecture en forme de U avec des chemins d'encodage et de décodage.
+   - **Application** : Nous avons utilisé un modèle U-Net préentraîné pour effectuer des tâches de débruitage sur les images, en exploitant ses capacités à préserver les détails tout en éliminant le bruit.
+
+2. **Débruitage par ondelettes** :
+   - **Description** : Les transformations par ondelettes sont des techniques mathématiques qui décomposent une image en différentes échelles de résolution, permettant une analyse et un traitement multi-résolution. Le débruitage par ondelettes consiste à supprimer les coefficients de détail correspondant au bruit tout en conservant les coefficients représentant les structures importantes de l'image.
+   - **Application** : Cette méthode a été utilisée pour réduire le bruit tout en conservant les détails fins et les structures importantes dans les images.
+
+3. **Autoencodeur entraîné sur des parties d'images nettes** :
+   - **Description** : Un autoencodeur est un type de réseau de neurones qui apprend à encoder une image en une représentation compacte puis à la décoder pour reconstruire l'image originale. En entraînant un autoencodeur sur des parties d'images nettes, il apprend à capturer les caractéristiques essentielles des images sans bruit.
+   - **Application** : Nous avons formé un autoencodeur sur des patches d'images nettes, et l'avons utilisé comme débruiteur pour restaurer les images dégradées en éliminant le bruit et en récupérant les structures perdues.
+
+### Algorithmes d'Optimisation
+
+Pour intégrer ces débruiteurs dans notre processus de reconstruction d'images, nous avons appliqué deux algorithmes d'optimisation principaux :
+
+1. **Algorithme ADMM (Alternating Direction Method of Multipliers)** :
+   - **Principe** : ADMM est une méthode d'optimisation qui décompose un problème complexe en sous-problèmes plus simples, résolus de manière itérative. Il est particulièrement adapté pour les problèmes impliquant des termes de régularisation complexes, tels que ceux utilisés dans les méthodes Plug-and-Play.
+   - **Application** : Nous avons utilisé ADMM pour intégrer nos débruiteurs dans le processus d'optimisation, permettant une mise à jour alternée entre les termes de fidélité aux données et les contraintes de régularisation imposées par les débruiteurs.
+
+2. **Descente de Gradient** :
+   - **Principe** : La descente de gradient est une méthode d'optimisation itérative qui met à jour les paramètres en suivant la direction du gradient de la fonction de coût. Pour les méthodes Plug-and-Play, cette approche est modifiée pour inclure une étape de débruitage à chaque itération.
+   - **Application** : Nous avons implémenté une descente de gradient modifiée, où chaque itération comprend une mise à jour par gradient suivie d'une étape de débruitage. Cela permet d'intégrer les capacités de nos débruiteurs tout en minimisant le terme de fidélité aux données.
+
+### Résultats et Applications
+
+En appliquant ces méthodes Plug-and-Play avec différents débruiteurs et algorithmes d'optimisation, nous avons réussi à améliorer la qualité des images dans plusieurs contextes :
+
+- **Défloutage** : Récupération d'images nettes à partir de versions floues.
+
+   METTRE IMAGE RESULTAT
+- **Inpainting** : Reconstruction des parties manquantes d'images de manière réaliste.
+  METTRE RESULTAT
+- **Hyperrésolution** : Augmentation de la résolution des images pour révéler des détails supplémentaires.
+- **Tomographie** : Reconstruction d'images tomographiques à partir de projections limitées ou bruitées. La tomographie est une technique d'imagerie qui permet de visualiser l'intérieur d'un objet en reconstruisant une image à partir de multiples projections. En intégrant les méthodes Plug-and-Play, nous avons pu améliorer la qualité des reconstructions tomographiques en utilisant nos débruiteurs avancés pour éliminer le bruit et rehausser les détails fins des images reconstruites.
+
+Ces approches ont montré une grande efficacité dans la résolution des problèmes inverses, offrant des résultats de haute qualité en exploitant la puissance des débruiteurs avancés et des algorithmes d'optimisation robustes.
