@@ -72,13 +72,13 @@ comment cela peut être appliqué :
     $\mathbf{x}$ se fait en deux étapes :
 
     **Mise à jour par descente de gradient** :
-$x_{k+1} = x_k - \alpha A^{T}(y - Ax_k),$
+$z_{k+1} = x_k - \alpha A^{T}(y - Ax_k),$
 où $\alpha$ est le pas de la descente de gradient.
 
 
 
 
-    **Débruitage Plug-and-Play** : $$x_{k+1} = \tau (x_{k+1} - D(x_{k+1}))$$
+    **Débruitage Plug-and-Play** : $$x_{k+1} = z_k - \tau (x_{k} - D(x_{k}))$$
     où $D$ est le débruiteur utilisé comme modèle de
     régularisation implicite et $\tau$ le poids de régularisation.
 
