@@ -258,7 +258,7 @@ images dans plusieurs contextes :
     qualité des reconstructions tomographiques en utilisant nos
     débruiteurs avancés pour éliminer le bruit et rehausser les détails
     fins des images reconstruites.
-        ![](image/ImagesReadme/transfo Radon.png)
+        ![](image/ImagesReadme/transfoRadon.png)
 
 Ces approches ont montré une grande efficacité dans la résolution des
 problèmes inverses, offrant des résultats de haute qualité en exploitant
