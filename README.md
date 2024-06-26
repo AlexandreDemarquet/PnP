@@ -71,17 +71,17 @@ comment cela peut être appliqué :
     débruiteur dans chaque itération. La mise à jour de l'estimation
     $\mathbf{x}$ se fait en deux étapes :
 
-    -**Mise à jour par descente de gradient** :
-$$
-\mathbf{x}_{k+1} = \mathbf{x}_k - \alpha \nabla_{\mathbf{x}} \left( \frac{1}{2} \|\mathbf{y} - \mathbf{A} \mathbf{x}_k\|^2_2 \right),
-$$
-où $\alpha$ est le pas de la descente de gradient et $\nabla_{\mathbf{x}}$ est le gradient de la fonction de coût par rapport à $\mathbf{x}$.
+    **Mise à jour par descente de gradient** :
+    $$
+    \mathbf{x}_{k+1} = \mathbf{x}_k - \alpha \nabla_{\mathbf{x}} \left( \frac{1}{2} \|\mathbf{y} - \mathbf{A} \mathbf{x}_k\|^2_2 \right),
+    $$
+    où $\alpha$ est le pas de la descente de gradient et $\nabla_{\mathbf{x}}$ est le gradient de la fonction de coût par rapport à $\mathbf{x}$.
 
 
-    -   **Débruitage Plug-and-Play** :
-        $\mathbf{x}_{k+1} = \tau (x_{k+1} - D_{\sigma}(\mathbf{x}_{k+1})),$
-        où $D_{\sigma}$ est le débruiteur utilisé comme modèle de
-        régularisation implicite et $\tau$ le poids de régularisation.
+    **Débruitage Plug-and-Play** :
+    $\mathbf{x}_{k+1} = \tau (x_{k+1} - D_{\sigma}(\mathbf{x}_{k+1})),$
+    où $D_{\sigma}$ est le débruiteur utilisé comme modèle de
+    régularisation implicite et $\tau$ le poids de régularisation.
 
 3.  **Itération** : Ces étapes sont répétées jusqu'à convergence,
     c'est-à-dire jusqu'à ce que la différence entre deux itérations
@@ -104,21 +104,19 @@ inverses. Voici comment cela fonctionne :
     termes de régularisation et de fidélité aux données. La mise à jour
     de l'estimation se fait en trois étapes :
 
-    -   **Mise à jour de** $x$ : $$
-        x^{k+1} = \text{prox}_f(v^k - u^k)
-        $$ où $\text{prox}_f$ est l'opérateur de proximité associé à la
+    -   **Mise à jour de** $x$ : $x^{k+1} = \text{prox}_f(v^k - u^k)$
+        où $\text{prox}_f$ est l'opérateur de proximité associé à la
         fonction $f$, minimisant la somme de $f(x)$ et d'un terme
         quadratique qui lie $x$ à $v^k - u^k$.
 
-    -   **Mise à jour de** $v$ : $$
-        v^{k+1} = \text{prox}_h(x^{k+1} + u^k)
-        $$ où $\text{prox}_h$ gère la fonction $h$ et vise à régulariser
+    -   **Mise à jour de** $v$ : $v^{k+1} = \text{prox}_h(x^{k+1} + u^k)$
+        où $\text{prox}_h$ gère la fonction $h$ et vise à régulariser
         $x^{k+1}$ en ajoutant la contribution de $u^k$, en minimisant
         $h(v)$ avec un terme quadratique reliant $v$ à $x^{k+1} + u^k$.
 
-    -   **Mise à jour de** $u$ : $$
+    -   **Mise à jour de** $u$ : $
         u^{k+1} = u^k + (x^{k+1} - v^{k+1})
-        $$ Cette mise à jour ajuste les multiplicateurs de Lagrange pour
+        $ Cette mise à jour ajuste les multiplicateurs de Lagrange pour
         refléter l'écart entre $x^{k+1}$ et $v^{k+1}$, aidant à la
         convergence de l'algorithme vers une solution qui respecte à la
         fois $f$ et $h$.
@@ -244,10 +242,12 @@ images dans plusieurs contextes :
     METTRE IMAGE RESULTAT
 
 -   **Inpainting** : Reconstruction des parties manquantes d'images de
-    manière réaliste. METTRE RESULTAT
+    manière réaliste.
+    ![](image/ImagesReadme/inpainting.png)
 
 -   **Hyperrésolution** : Augmentation de la résolution des images pour
     révéler des détails supplémentaires.
+    ![](image/ImagesReadme/défloutagedescentedegrad.png)
 
 -   **Tomographie** : Reconstruction d'images tomographiques à partir de
     projections limitées ou bruitées. La tomographie est une technique
@@ -257,6 +257,7 @@ images dans plusieurs contextes :
     qualité des reconstructions tomographiques en utilisant nos
     débruiteurs avancés pour éliminer le bruit et rehausser les détails
     fins des images reconstruites.
+        ![](image/ImagesReadme/transfo Radon.png)
 
 Ces approches ont montré une grande efficacité dans la résolution des
 problèmes inverses, offrant des résultats de haute qualité en exploitant
