@@ -103,7 +103,7 @@ inverses. Voici comment cela fonctionne :
     termes de régularisation et de fidélité aux données. La mise à jour
     de l'estimation se fait en trois étapes :
 
-    -   **Mise à jour de** $x$ : $$x_{k+1} = \text{prox}_f(v_k - u_k)$$
+    -   **Mise à jour de** $x$ : $x_{k+1} = \text{prox}_f(v_k - u_k)$
 
     -   **Mise à jour de** $v$ : $v_{k+1} = prox_h(x_{k+1} + u_k)$
 
