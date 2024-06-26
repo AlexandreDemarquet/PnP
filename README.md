@@ -80,8 +80,8 @@ où $\alpha$ est le pas de la descente de gradient et $\nabla_{\mathbf{x}}$ est 
 
 
 
-    **Débruitage Plug-and-Play** : $$\mathbf{x}_{k+1} = \tau (x_{k+1} - D_{\sigma}(\mathbf{x}_{k+1}))$$
-    où $D_{\sigma}$ est le débruiteur utilisé comme modèle de
+    **Débruitage Plug-and-Play** : $$x_{k+1} = \tau (x_{k+1} - D(x_{k+1}))$$
+    où $D$ est le débruiteur utilisé comme modèle de
     régularisation implicite et $\tau$ le poids de régularisation.
 
 4.  **Itération** : Ces étapes sont répétées jusqu'à convergence,
