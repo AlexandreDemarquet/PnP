@@ -266,3 +266,13 @@ Ces approches ont montré une grande efficacité dans la résolution des
 problèmes inverses, offrant des résultats de haute qualité en exploitant
 la puissance des débruiteurs avancés et des algorithmes d'optimisation
 robustes.
+
+### Organisation du dépot
+- Notebook résumant tout le travail : Pnp.ipynb
+- Notebook comparant les performances des débruiteurs utilisés : ComparaisonDebruiteur.ipynb
+- Sources du projet : /Documentation
+
+### Sources
+
+Voir le dossier documentation pour accéder aux pdf et aux liens qui nous
+ont permis de réaliser ce projet.
