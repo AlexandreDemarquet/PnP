@@ -112,9 +112,9 @@ inverses. Voici comment cela fonctionne :
         $x^{k+1}$ en ajoutant la contribution de $u^k$, en minimisant
         $h(v)$ avec un terme quadratique reliant $v$ à $x^{k+1} + u^k$.
 
-    -   **Mise à jour de** $u$ : $
-        u^{k+1} = u^k + (x^{k+1} - v^{k+1})
-        $ Cette mise à jour ajuste les multiplicateurs de Lagrange pour
+    -   **Mise à jour de** $u$ : 
+        $$u^{k+1} = u^k + (x^{k+1} - v^{k+1})$$
+        Cette mise à jour ajuste les multiplicateurs de Lagrange pour
         refléter l'écart entre $x^{k+1}$ et $v^{k+1}$, aidant à la
         convergence de l'algorithme vers une solution qui respecte à la
         fois $f$ et $h$.
