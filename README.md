@@ -12,9 +12,9 @@ manquantes d'une image.
 
 Mathématiquement, cela peut être exprimé par :
 
-$
+$$
 \mathbf{y} = \mathbf{A} \mathbf{x} + \mathbf{n},
-$
+$$
 
 où :
 
