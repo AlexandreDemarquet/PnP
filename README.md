@@ -241,6 +241,16 @@ images dans plusieurs contextes :
     floues.
 
     METTRE IMAGE RESULTAT
+    Défloutage appliqué à des zones particulières d'une image quand le
+    floutage n'est pas uniforme, l'on peut estimer le masque de floutage
+    avec un réseau de neuronne :
+    ![](image/ImagesReadme/mask.png)
+    ![](image/ImagesReadme/mask2.png)
+
+
+    Et ensuite appliquer les algorithmes sur le masque estimé plutôt
+    que sur l'image complète:
+    ![](image/ImagesReadme/avecmask.png)
 
 -   **Inpainting** : Reconstruction des parties manquantes d'images de
     manière réaliste.
