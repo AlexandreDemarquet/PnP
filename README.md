@@ -72,7 +72,7 @@ comment cela peut être appliqué :
     $\mathbf{x}$ se fait en deux étapes :
 
     **Mise à jour par descente de gradient** :
-$z_{k+1} = x_k - \alpha A^{T}(y - Ax_k),$
+$z_{k} = x_k - \alpha A^{T}(y - Ax_k),$
 où $\alpha$ est le pas de la descente de gradient.
 
 
