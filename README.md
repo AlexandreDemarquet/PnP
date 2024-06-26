@@ -72,8 +72,10 @@ comment cela peut être appliqué :
     $\mathbf{x}$ se fait en deux étapes :
 
     **Mise à jour par descente de gradient** :
-    $$\mathbf{x}_{k+1} = \mathbf{x}_k - \alpha \nabla_{\mathbf{x}} ( \frac{1}{2} \|\mathbf{y} - \mathbf{A} \mathbf{x}_k\|^2_2)$$, 
-    où $\alpha$ est le pas de la descente de gradient et $\nabla_{\mathbf{x}}$ est le gradient de la fonction de coût par rapport à $\mathbf{x}$.
+    $$
+    \mathbf{x}_{k+1} = \mathbf{x}_k - \alpha \nabla_{\mathbf{x}} ( \frac{1}{2} \|\mathbf{y} - \mathbf{A} \mathbf{x}_k\|^2_2)
+    $$
+      ù $\alpha$ est le pas de la descente de gradient et $\nabla_{\mathbf{x}}$ est le gradient de la fonction de coût par rapport à $            \mathbf{x}$.
 
 
     **Débruitage Plug-and-Play** :
@@ -81,7 +83,7 @@ comment cela peut être appliqué :
     où $D_{\sigma}$ est le débruiteur utilisé comme modèle de
     régularisation implicite et $\tau$ le poids de régularisation.
 
-3.  **Itération** : Ces étapes sont répétées jusqu'à convergence,
+4.  **Itération** : Ces étapes sont répétées jusqu'à convergence,
     c'est-à-dire jusqu'à ce que la différence entre deux itérations
     successives soit suffisamment petite.
 
