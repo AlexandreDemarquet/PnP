@@ -102,20 +102,20 @@ inverses. Voici comment cela fonctionne :
     termes de régularisation et de fidélité aux données. La mise à jour
     de l'estimation se fait en trois étapes :
 
-    -   **Mise à jour de** $x$ : $x^{k+1} = \text{prox}_f(v^k - u^k)$
+    -   **Mise à jour de** $x$ : $x_{k+1} = \text{prox}_f(v_k - u_k)$
         où $\text{prox}_f$ est l'opérateur de proximité associé à la
         fonction $f$, minimisant la somme de $f(x)$ et d'un terme
         quadratique qui lie $x$ à $v^k - u^k$.
 
-    -   **Mise à jour de** $v$ : $v^{k+1} = \text{prox}_h(x^{k+1} + u^k)$
+    -   **Mise à jour de** $v$ : $v_{k+1} = \text{prox}_h(x_{k+1} + u_k)$
         où $\text{prox}_h$ gère la fonction $h$ et vise à régulariser
-        $x^{k+1}$ en ajoutant la contribution de $u^k$, en minimisant
-        $h(v)$ avec un terme quadratique reliant $v$ à $x^{k+1} + u^k$.
+        $x_{k+1}$ en ajoutant la contribution de $u_k$, en minimisant
+        $h(v)$ avec un terme quadratique reliant $v$ à $x_{k+1} + u_k$.
 
     -   **Mise à jour de** $u$ : 
-        $$u^{k+1} = u^k + (x^{k+1} - v^{k+1})$$
+        $$u_{k+1} = u_k + (x_{k+1} - v_{k+1})$$
         Cette mise à jour ajuste les multiplicateurs de Lagrange pour
-        refléter l'écart entre $x^{k+1}$ et $v^{k+1}$, aidant à la
+        refléter l'écart entre $x_{k+1}$ et $v_{k+1}$, aidant à la
         convergence de l'algorithme vers une solution qui respecte à la
         fois $f$ et $h$.
 
