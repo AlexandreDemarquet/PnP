@@ -72,8 +72,9 @@ comment cela peut être appliqué :
     $\mathbf{x}$ se fait en deux étapes :
 
     **Mise à jour par descente de gradient** :
-    $\mathbf{x}_{k+1} = \mathbf{x}_k - \alpha \nabla_{\mathbf{x}} ( \frac{1}{2} \|\mathbf{y} - \mathbf{A} \mathbf{x}_k\|^2_2),$
-      où $\alpha$ est le pas de la descente de gradient et $\nabla_{\mathbf{x}}$ est le gradient de la fonction de coût par rapport à $            \mathbf{x}$.
+$$\mathbf{x}_{k+1} = \mathbf{x}_k - \alpha \nabla_{\mathbf{x}} \left( \frac{1}{2} \|\mathbf{y} - \mathbf{A} \mathbf{x}_k\|^2_2 \right),$$
+où $\alpha$ est le pas de la descente de gradient et $\nabla_{\mathbf{x}}$ est le gradient de la fonction de coût par rapport à $\mathbf{x}$.
+
 
 
     **Débruitage Plug-and-Play** : $$\mathbf{x}_{k+1} = \tau (x_{k+1} - D_{\sigma}(\mathbf{x}_{k+1}))$$
