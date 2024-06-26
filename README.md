@@ -105,7 +105,7 @@ inverses. Voici comment cela fonctionne :
 
     -   **Mise à jour de** $x$ : $$x_{k+1} = \text{prox}_f(v_k - u_k)$$
 
-    -   **Mise à jour de** $v$ : $$v_{k+1} = \text{prox}_h(x_{k+1} + u_k)$$
+    -   **Mise à jour de** $v$ : $v_{k+1} = \text{prox}_h(x_{k+1} + u_k)$
 
     -   **Mise à jour de** $u$ : 
         $u_{k+1} = u_k + (x_{k+1} - v_{k+1})$
