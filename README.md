@@ -72,7 +72,7 @@ comment cela peut être appliqué :
     $\mathbf{x}$ se fait en deux étapes :
 
     **Mise à jour par descente de gradient** :
-    $$\mathbf{x}_{k+1} = \mathbf{x}_k - \alpha \nabla_{\mathbf{x}} ( \frac{1}{2} \|\mathbf{y} - \mathbf{A} \mathbf{x}_k\|^2_2),$$ 
+    $\mathbf{x}_{k+1} = \mathbf{x}_k - \alpha \nabla_{\mathbf{x}} ( \frac{1}{2} \|\mathbf{y} - \mathbf{A} \mathbf{x}_k\|^2_2),$
       où $\alpha$ est le pas de la descente de gradient et $\nabla_{\mathbf{x}}$ est le gradient de la fonction de coût par rapport à $            \mathbf{x}$.
 
 
@@ -112,7 +112,7 @@ inverses. Voici comment cela fonctionne :
         $h(v)$ avec un terme quadratique reliant $v$ à $x_{k+1} + u_k$.
 
     -   **Mise à jour de** $u$ : 
-        $$u_{k+1} = u_k + (x_{k+1} - v_{k+1})$$
+        $u_{k+1} = u_k + (x_{k+1} - v_{k+1})$
         Cette mise à jour ajuste les multiplicateurs de Lagrange pour
         refléter l'écart entre $x_{k+1}$ et $v_{k+1}$, aidant à la
         convergence de l'algorithme vers une solution qui respecte à la
