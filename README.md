@@ -76,8 +76,7 @@ comment cela peut être appliqué :
        $\alpha$ est le pas de la descente de gradient et $\nabla_{\mathbf{x}}$ est le gradient de la fonction de coût par rapport à $            \mathbf{x}$.
 
 
-    **Débruitage Plug-and-Play** :
-    $$\mathbf{x}_{k+1} = \tau (x_{k+1} - D_{\sigma}(\mathbf{x}_{k+1})),$$
+    **Débruitage Plug-and-Play** : $$\mathbf{x}_{k+1} = \tau (x_{k+1} - D_{\sigma}(\mathbf{x}_{k+1}))$$
     où $D_{\sigma}$ est le débruiteur utilisé comme modèle de
     régularisation implicite et $\tau$ le poids de régularisation.
 
