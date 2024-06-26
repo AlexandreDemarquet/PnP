@@ -102,10 +102,10 @@ inverses. Voici comment cela fonctionne :
     termes de régularisation et de fidélité aux données. La mise à jour
     de l'estimation se fait en trois étapes :
 
-    -   **Mise à jour de** $x$ : $x_{k+1} = \text{prox}_f(v_k - u_k)$
+    -   **Mise à jour de** $x$ : $$x_{k+1} = \text{prox}_f(v_k - u_k)$$
         où $\text{prox}_f$ est l'opérateur de proximité associé à la
         fonction $f$, minimisant la somme de $f(x)$ et d'un terme
-        quadratique qui lie $x$ à $v^k - u^k$.
+        quadratique qui lie $x$ à $v_k - u_k$.
 
     -   **Mise à jour de** $v$ : $v_{k+1} = \text{prox}_h(x_{k+1} + u_k)$
         où $\text{prox}_h$ gère la fonction $h$ et vise à régulariser
