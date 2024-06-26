@@ -1,9 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
 # Plug and play project
 
 ## Problèmes Inverses et Méthodes Plug-and-Play
@@ -18,9 +12,9 @@ manquantes d'une image.
 
 Mathématiquement, cela peut être exprimé par :
 
-$$
+$
 \mathbf{y} = \mathbf{A} \mathbf{x} + \mathbf{n},
-$$
+$
 
 où :
 
