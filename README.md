@@ -18,9 +18,9 @@ manquantes d'une image.
 
 Mathématiquement, cela peut être exprimé par :
 
-$
+$$
 \mathbf{y} = \mathbf{A} \mathbf{x} + \mathbf{n},
-$
+$$
 
 où :
 
@@ -38,9 +38,9 @@ $\mathbf{x}$ qui soit compatible avec les observations $\mathbf{y}$ tout
 en respectant certaines propriétés désirées (comme la netteté ou la
 régularité). Cela peut être formulé comme un problème d'optimisation :
 
-$
+$$
 \min_{\mathbf{x}} \frac{1}{2} \|\mathbf{y} - \mathbf{A} \mathbf{x}\|^2_2 + \lambda R(\mathbf{x}),
-$
+$$
 
 où :
 
