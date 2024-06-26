@@ -107,7 +107,7 @@ inverses. Voici comment cela fonctionne :
         fonction $f$, minimisant la somme de $f(x)$ et d'un terme
         quadratique qui lie $x$ à $v_k - u_k$.
 
-    -   **Mise à jour de** $v$ : $v_{k+1} = \text{prox}_h(x_{k+1} + u_k)$
+    -   **Mise à jour de** $v$ : $$v_{k+1} = \text{prox}_h(x_{k+1} + u_k)$$
         où $\text{prox}_h$ gère la fonction $h$ et vise à régulariser
         $x_{k+1}$ en ajoutant la contribution de $u_k$, en minimisant
         $h(v)$ avec un terme quadratique reliant $v$ à $x_{k+1} + u_k$.
