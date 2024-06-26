@@ -1,137 +1,87 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
 # Plug and play project
 
 ## Problèmes Inverses et Méthodes Plug-and-Play
 
 ### Problème Inverse
 
-Les problèmes inverses sont des défis courants en traitement d'images où
-l'objectif est de reconstruire une image originale à partir de ses
-observations dégradées. Par exemple, il s'agit de récupérer une photo
-nette à partir d'une version floue ou de restaurer des parties
-manquantes d'une image.
+Les problèmes inverses sont des défis courants en traitement d'images où l'objectif est de reconstruire une image originale à partir de ses observations dégradées. Par exemple, il s'agit de récupérer une photo nette à partir d'une version floue ou de restaurer des parties manquantes d'une image.
 
 Mathématiquement, cela peut être exprimé par :
-
-$$
-\mathbf{y} = \mathbf{A} \mathbf{x} + \mathbf{n},
-$$
+<div style="font-family: 'Times New Roman', Times, serif;">
+  <p><code>y = Ax + n</code>,</p>
+</div>
 
 où :
-
--   $\mathbf{y}$ est l'image observée, souvent dégradée.
--   $\mathbf{A}$ représente l'opération qui a dégradé l'image originale
-    (comme le flou, la réduction de résolution, etc.).
--   $\mathbf{x}$ est l'image originale que nous cherchons à
-    reconstruire.
--   $\mathbf{n}$ est le bruit ajouté lors de l'observation.
+- <code>y</code> est l'image observée, souvent dégradée.
+- <code>A</code> représente l'opération qui a dégradé l'image originale (comme le flou, la réduction de résolution, etc.).
+- <code>x</code> est l'image originale que nous cherchons à reconstruire.
+- <code>n</code> est le bruit ajouté lors de l'observation.
 
 ### Formulation du Problème
 
-Pour résoudre un problème inverse, nous voulons trouver une image
-$\mathbf{x}$ qui soit compatible avec les observations $\mathbf{y}$ tout
-en respectant certaines propriétés désirées (comme la netteté ou la
-régularité). Cela peut être formulé comme un problème d'optimisation :
-
-$$
-\min_{\mathbf{x}} \frac{1}{2} \|\mathbf{y} - \mathbf{A} \mathbf{x}\|^2_2 + \lambda R(\mathbf{x}),
-$$
+Pour résoudre un problème inverse, nous voulons trouver une image <code>x</code> qui soit compatible avec les observations <code>y</code> tout en respectant certaines propriétés désirées (comme la netteté ou la régularité). Cela peut être formulé comme un problème d'optimisation :
+<div style="font-family: 'Times New Roman', Times, serif;">
+  <p><code>min_x (1/2 ||y - Ax||^2_2 + λR(x)),</code></p>
+</div>
 
 où :
-
--   $\frac{1}{2} \|\mathbf{y} - \mathbf{A} \mathbf{x}\|^2_2$ est le
-    terme de fidélité aux données, assurant que notre estimation
-    $\mathbf{x}$ est proche de l'observation $\mathbf{y}$.
--   $R(\mathbf{x})$ est un terme de régularisation qui impose des
-    contraintes supplémentaires sur $\mathbf{x}$ pour obtenir une
-    solution réaliste.
--   $\lambda$ est un paramètre qui équilibre l'importance de la fidélité
-    aux données et de la régularisation.
+- <code>1/2 ||y - Ax||^2_2</code> est le terme de fidélité aux données, assurant que notre estimation <code>x</code> est proche de l'observation <code>y</code>.
+- <code>R(x)</code> est un terme de régularisation qui impose des contraintes supplémentaires sur <code>x</code> pour obtenir une solution réaliste.
+- <code>λ</code> est un paramètre qui équilibre l'importance de la fidélité aux données et de la régularisation.
 
 ### Méthodes Plug-and-Play
 
-Les méthodes Plug-and-Play (PnP) sont une solution flexible et puissante
-pour résoudre les problèmes inverses. Plutôt que de définir
-explicitement le terme de régularisation $R(\mathbf{x})$, les méthodes
-PnP utilisent des débruiteurs avancés comme régularisateurs implicites.
-Ces débruiteurs peuvent être des réseaux de neurones préentraînés ou
-d'autres modèles sophistiqués.
+Les méthodes Plug-and-Play (PnP) sont une solution flexible et puissante pour résoudre les problèmes inverses. Plutôt que de définir explicitement le terme de régularisation <code>R(x)</code>, les méthodes PnP utilisent des débruiteurs avancés comme régularisateurs implicites. Ces débruiteurs peuvent être des réseaux de neurones préentraînés ou d'autres modèles sophistiqués.
 
 #### Utilisation de la Descente de Gradient
 
-La descente de gradient est une méthode populaire pour résoudre des
-problèmes inverses en utilisant des techniques Plug-and-Play. Voici
-comment cela peut être appliqué :
+La descente de gradient est une méthode populaire pour résoudre des problèmes inverses en utilisant des techniques Plug-and-Play. Voici comment cela peut être appliqué :
 
-1.  **Formulation du problème** : Nous cherchons à minimiser une
-    fonction de coût composée d'un terme de fidélité aux données et d'un
-    terme de régularisation implicite.
+1. **Formulation du problème** : Nous cherchons à minimiser une fonction de coût composée d'un terme de fidélité aux données et d'un terme de régularisation implicite.
+2. **Algorithme de descente de gradient avec débruitage** :
+   L'algorithme de descente de gradient est modifié pour intégrer un débruiteur dans chaque itération. La mise à jour de l'estimation <code>x</code> se fait en deux étapes :
+    - **Mise à jour par descente de gradient** :
+      <div style="font-family: 'Times New Roman', Times, serif;">
+        <p><code>x_{k+1} = x_k - α∇_x (1/2 ||y - Ax_k||^2_2),</code></p>
+      </div>
+      où <code>α</code> est le pas de la descente de gradient et <code>∇_x</code> est le gradient de la fonction de coût par rapport à <code>x</code>.
+    - **Débruitage Plug-and-Play** :
+      <div style="font-family: 'Times New Roman', Times, serif;">
+        <p><code>x_{k+1} = τ (x_{k+1} - D_σ(x_{k+1})),</code></p>
+      </div>
+      où <code>D_σ</code> est le débruiteur utilisé comme modèle de régularisation implicite et <code>τ</code> le poids de régularisation.
 
-2.  **Algorithme de descente de gradient avec débruitage** :
-    L'algorithme de descente de gradient est modifié pour intégrer un
-    débruiteur dans chaque itération. La mise à jour de l'estimation
-    $\mathbf{x}$ se fait en deux étapes :
-
-    -   **Mise à jour par descente de gradient** :
-        $\mathbf{x}_{k+1} = \mathbf{x}_k - \alpha \nabla_{\mathbf{x}} \left( \frac{1}{2} \|\mathbf{y} - \mathbf{A} \mathbf{x}_k\|^2_2 \right),$
-        où $\alpha$ est le pas de la descente de gradient et
-        $\nabla_{\mathbf{x}}$ est le gradient de la fonction de coût par
-        rapport à $\mathbf{x}$.
-
-    -   **Débruitage Plug-and-Play** :
-        $\mathbf{x}_{k+1} = \tau (x_{k+1} - D_{\sigma}(\mathbf{x}_{k+1})),$
-        où $D_{\sigma}$ est le débruiteur utilisé comme modèle de
-        régularisation implicite et $\tau$ le poids de régularisation.
-
-3.  **Itération** : Ces étapes sont répétées jusqu'à convergence,
-    c'est-à-dire jusqu'à ce que la différence entre deux itérations
-    successives soit suffisamment petite.
+3. **Itération** : Ces étapes sont répétées jusqu'à convergence, c'est-à-dire jusqu'à ce que la différence entre deux itérations successives soit suffisamment petite.
 
 #### Utilisation de l'Algorithme ADMM
 
-L'algorithme ADMM (Alternating Direction Method of Multipliers) est
-souvent utilisé avec les méthodes PnP pour résoudre des problèmes
-inverses. Voici comment cela fonctionne :
+L'algorithme ADMM (Alternating Direction Method of Multipliers) est souvent utilisé avec les méthodes PnP pour résoudre des problèmes inverses. Voici comment cela fonctionne :
 
-1.  **Formulation du problème** : Nous cherchons à minimiser une
-    fonction de coût composée d'un terme de fidélité aux données et d'un
-    terme de régularisation implicite, qui peut être décomposée en deux
-    sous-problèmes via des fonctions $f$ et $h$ :
-    $\min f({x}) + \lambda h({x})$
+1. **Formulation du problème** : Nous cherchons à minimiser une fonction de coût composée d'un terme de fidélité aux données et d'un terme de régularisation implicite, qui peut être décomposée en deux sous-problèmes via des fonctions <code>f</code> et <code>h</code> :
+   <div style="font-family: 'Times New Roman', Times, serif;">
+     <p><code>min f(x) + λh(x)</code></p>
+   </div>
 
-2.  **Algorithme ADMM avec opérateurs de proximité** : L'algorithme ADMM
-    est modifié pour intégrer des opérateurs de proximité qui gèrent les
-    termes de régularisation et de fidélité aux données. La mise à jour
-    de l'estimation se fait en trois étapes :
+2. **Algorithme ADMM avec opérateurs de proximité** : L'algorithme ADMM est modifié pour intégrer des opérateurs de proximité qui gèrent les termes de régularisation et de fidélité aux données. La mise à jour de l'estimation se fait en trois étapes :
 
-    -   **Mise à jour de** $x$ : $$
-        x^{k+1} = \text{prox}_f(v^k - u^k)
-        $$ où $\text{prox}_f$ est l'opérateur de proximité associé à la
-        fonction $f$, minimisant la somme de $f(x)$ et d'un terme
-        quadratique qui lie $x$ à $v^k - u^k$.
+    - **Mise à jour de <code>x</code>** :
+      <div style="font-family: 'Times New Roman', Times, serif;">
+        <p><code>x^{k+1} = prox_f(v^k - u^k)</code></p>
+      </div>
+      où <code>prox_f</code> est l'opérateur de proximité associé à la fonction <code>f</code>, minimisant la somme de <code>f(x)</code> et d'un terme quadratique qui lie <code>x</code> à <code>v^k - u^k</code>.
+    - **Mise à jour de <code>v</code>** :
+      <div style="font-family: 'Times New Roman', Times, serif;">
+        <p><code>v^{k+1} = prox_h(x^{k+1} + u^k)</code></p>
+      </div>
+      où <code>prox_h</code> gère la fonction <code>h</code> et vise à régulariser <code>x^{k+1}</code> en ajoutant la contribution de <code>u^k</code>, en minimisant <code>h(v)</code> avec un terme quadratique reliant <code>v</code> à <code>x^{k+1} + u^k</code>.
+    - **Mise à jour de <code>u</code>** :
+      <div style="font-family: 'Times New Roman', Times, serif;">
+        <p><code>u^{k+1} = u^k + (x^{k+1} - v^{k+1})</code></p>
+      </div>
+      Cette mise à jour ajuste les multiplicateurs de Lagrange pour refléter l'écart entre <code>x^{k+1}</code> et <code>v^{k+1}</code>, aidant à la convergence de l'algorithme vers une solution qui respecte à la fois <code>f</code> et <code>h</code>.
 
-    -   **Mise à jour de** $v$ : $$
-        v^{k+1} = \text{prox}_h(x^{k+1} + u^k)
-        $$ où $\text{prox}_h$ gère la fonction $h$ et vise à régulariser
-        $x^{k+1}$ en ajoutant la contribution de $u^k$, en minimisant
-        $h(v)$ avec un terme quadratique reliant $v$ à $x^{k+1} + u^k$.
+3. **Débruitage Plug-and-Play** : L'opérateur <code>prox_h</code> est remplacé par un débruiteur, permettant d'incorporer des régularisations implicites dans le processus de résolution du problème inverse.
 
-    -   **Mise à jour de** $u$ : $$
-        u^{k+1} = u^k + (x^{k+1} - v^{k+1})
-        $$ Cette mise à jour ajuste les multiplicateurs de Lagrange pour
-        refléter l'écart entre $x^{k+1}$ et $v^{k+1}$, aidant à la
-        convergence de l'algorithme vers une solution qui respecte à la
-        fois $f$ et $h$.
-
-3.  **Débruitage Plug-and-Play** : L'opérateur $\text{prox}_h$ est
-    remplacé par un débruiteur, permettant d'incorporer des
-    régularisations implicites dans le processus de résolution du
-    problème inverse.
 
 4.  **Itération** : Ces étapes sont répétées jusqu'à convergence,
     c'est-à-dire jusqu'à ce que la différence entre les itérations
