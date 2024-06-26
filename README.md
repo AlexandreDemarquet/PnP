@@ -73,7 +73,7 @@ comment cela peut être appliqué :
 
     **Mise à jour par descente de gradient** :
 $x_{k+1} = x_k - \alpha A^{T}(y - Ax_k),$
-où $\alpha$ est le pas de la descente de gradient et $\nabla_{\mathbf{x}}$ est le gradient de la fonction de coût par rapport à $\mathbf{x}$.
+où $\alpha$ est le pas de la descente de gradient.
 
 
 
