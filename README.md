@@ -183,7 +183,7 @@ Pour nos expériences, nous avons intégré plusieurs types de débruiteurs
     -   **Application** : Cette méthode a été utilisée pour réduire le
         bruit tout en conservant les détails fins et les structures
         importantes dans les images.
-3.  **Autoencodeur entraîné sur des parties d'images nettes** :
+3.  **Autoencodeur entraîné sur des parties d'imageNET ** :
     -   **Description** : Un autoencodeur est un type de réseau de
         neurones qui apprend à encoder une image en une représentation
         compacte puis à la décoder pour reconstruire l'image originale.
